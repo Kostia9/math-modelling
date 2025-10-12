@@ -58,6 +58,7 @@ def run_simulation(config: dict):
     """
     nx, ny = config['nx'], config['ny']
     Lx, Ly = config['Lx'], config['Ly']
+    c = config.get('c', 1.0)
     dt, max_steps = config['dt'], config['max_steps']
 
     hx = Lx / (nx - 1)
@@ -74,9 +75,9 @@ def run_simulation(config: dict):
     U1[1:nx - 1, 1:ny - 1] = U0[1:nx - 1, 1:ny - 1] + dt * dU[1:nx - 1, 1:ny - 1]
 
     # Base coefficients
-    ax0 = 0.5 / (hx ** 2) * np.ones((nx, ny))
+    ax0 = 0.5 * (c ** 2) / (hx ** 2) * np.ones((nx, ny))
     cx0 = ax0.copy()
-    ay0 = 0.5 / (hy ** 2) * np.ones((nx, ny))
+    ay0 = 0.5 * (c ** 2) / (hy ** 2) * np.ones((nx, ny))
     cy0 = ay0.copy()
     b0 = ax0 + cx0 + ay0 + cy0 + 1.0 / (dt ** 2)
 
@@ -90,7 +91,7 @@ def run_simulation(config: dict):
         d_rhs = np.zeros((nx, ny), dtype=float)
         d_rhs[1:nx - 1, 1:ny - 1] = (
             (-2.0 * U1[1:nx - 1, 1:ny - 1] + U0[1:nx - 1, 1:ny - 1]) / (dt ** 2)
-            - 0.5 * (
+            - 0.5 * (c ** 2) * (
                 (U0[0:nx - 2, 1:ny - 1] - 2.0 * U0[1:nx - 1, 1:ny - 1] + U0[2:nx, 1:ny - 1]) / (hx ** 2)
                 + (U0[1:nx - 1, 0:ny - 2] - 2.0 * U0[1:nx - 1, 1:ny - 1] + U0[1:nx - 1, 2:ny]) / (hy ** 2)
             )

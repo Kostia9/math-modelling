@@ -8,16 +8,17 @@ def get_config(experiment_type: str) -> dict:
         "ny": 101,
         "Lx": 1.0,
         "Ly": 1.0,
+        "c": 1.0,            # Wave speed
         "amplitude": 2e-4,   # Source amplitude (A)
         "frequency_k": 4,    # Source temporal frequency multiplier (KK)
         "dt": 1e-2,
-        "max_steps": 500,
+        "max_steps": 1000,
         "relax_alfa": 1.8,
         "relax_eps": 1e-13,
         "relax_max_iter": 5000,
         "experiment_type": experiment_type,
         "light_k": 2,
-        "ds": 4
+        "ds": 2
     }
 
     # --- Experiment-specific parameters ---
