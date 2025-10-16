@@ -20,12 +20,12 @@ def get_config(experiment_type: str) -> dict:
         "light_k": 2,
         "ds": 2
     }
-
+    
     # --- Experiment-specific parameters ---
     if experiment_type in ('FREE_CENTER', 'FREE_TWO_GENERATORS'):
         config['boundary_condition'] = 'neumann'
-    elif experiment_type == 'CLAMPED_CENTER':
-        config['boundary_condition'] = 'dirichlet'
+    elif experiment_type == 'CLAMPED_CENTER': 
+        config['boundary_condition'] = 'dirichlet' 
     else:
         raise ValueError(f"Unknown experiment_type: {experiment_type}")
 
